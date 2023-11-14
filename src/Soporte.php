@@ -7,7 +7,7 @@
  * Comentarios en inglés para mejorar la adaptabilidad del proyecto.
  * Descripción de algunos metodos para mejorar la legibilidad.
  */
-class Soporte
+abstract class Soporte extends Videoclub implements Resumible
 {
     /** @const float IVA - Constant value representing the VAT rate. */
     private const IVA = 1.21;
@@ -28,7 +28,7 @@ class Soporte
      * @param int $numero - Number of the support.
      * @param float $precio - Price of the support.
      */
-    public function __construct($titulo, $numero, $precio)
+    public function __construct($titulo, $numero = null, $precio)
     {
         $this->titulo = $titulo;
         $this->numero = $numero;

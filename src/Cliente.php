@@ -1,6 +1,6 @@
 <?php
 
-class Cliente
+class Cliente extends Videoclub
 {
     private $nombre;
     private $numero;
