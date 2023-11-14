@@ -1,6 +1,6 @@
 <?php
 
-class CintaVideo extends Soporte
+class CintaVideo extends Soporte implements Resumible
 {
     protected $duracion;
     public function __construct($titulo, $numero, $precio, $duracion)

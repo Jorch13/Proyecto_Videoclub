@@ -1,17 +1,22 @@
 <?php
-class Juego extends Soporte
+class Juego extends Soporte implements Resumible
 {
 
     public $consola;
     private $minNumJugadores;
     private $maxNumJugadores;
 
-    public function __construct($nom, $tit, $prec, $consola, $minJugadores, $maxJugadores)
+    public function __construct($titulo, $numero, $prec, $consola, $minJugadores, $maxJugadores)
     {
-        parent::__construct($nom, $tit, $prec);
+        parent::__construct($titulo, $numero, $prec);
         $this->consola = $consola;
         $this->minNumJugadores = $minJugadores;
         $this->maxNumJugadores = $maxJugadores;
+    }
+
+    public function muestraJugadoresPosibles()
+    {
+        return $this->fraseJugadores();
     }
 
     private function fraseJugadores()
@@ -23,11 +28,11 @@ class Juego extends Soporte
                 : "De " . $this->minNumJugadores . " a " . $this->maxNumJugadores . " jugadores.");
     }
 
-    public function muestraJugadoresPosibles()
-    {
-        return $this->fraseJugadores();
-    }
-
+    /**
+     * Devuelve en formato HTML un resumen del Juego
+     * 
+     * @return string Resumen de las caracteristicas juego
+     */
     public function muestraResumen()
     {
         $resumen = parent::muestraResumen();
