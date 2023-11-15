@@ -112,34 +112,44 @@ class Cliente extends Videoclub
      * @param int $numSoporte - Número del soporte a devolver.
      * @return bool - Devuelve true si la devolución fue exitosa, false en caso contrario.
      */
-    public function devolver(int $numSoporte): bool
+    private function devolver(int $numSoporte): bool
     {
         foreach ($this->soportesAlquilados as $key => $soporteAlquilado) {
             if ($soporteAlquilado->getNumero() === $numSoporte) {
                 unset($this->soportesAlquilados[$key]);
                 $this->numSoportesAlquilados--;
-                echo "El cliente {$this->nombre} ha devuelto el soporte {$numSoporte}.<br>";
+                $this->fraseDevolucion($numSoporte);
                 return true;
             }
         }
-
-        echo "El cliente {$this->nombre} no tiene alquilado el soporte {$numSoporte}.<br>";
         return false;
+    }
+
+    private function fraseDevolucion(int $numeroSoporte): string
+    {
+        $frase = "";
+        if ($this->devolver($numeroSoporte) === true) {
+            return $frase = "<p>El cliente {$this->nombre} ha devuelto el soporte {$numeroSoporte}.</p>";
+        }
+        return $frase = "<p>El cliente {$this->nombre} no tiene alquilado el soporte {$numeroSoporte}.</p>";
     }
 
     /**
      * Lista los alquileres del cliente y muestra un mensaje informando de la cantidad.
      */
-    public function listarAlquileres(): void
+    public function listarAlquileres(): string
     {
-        echo "<p>El cliente {$this->nombre} tiene {$this->numSoportesAlquilados} alquiler(es).</p>";
-        echo "<ul>";
+        $lista = "";
+        $lista = "<p>El cliente {$this->nombre} tiene {$this->numSoportesAlquilados} alquiler(es).</p>";
+        $lista .= "<ul>";
         if ($this->numSoportesAlquilados > 0) {
-            echo "<p>Lista de alquileres:</p>";
+            $lista .= "<p>Lista de alquileres:</p>";
             foreach ($this->soportesAlquilados as $soporte) {
-                echo "<li>- Soporte {$soporte->getNumero()}: {$soporte->titulo}</li>";
+                $lista .= "<li>- Soporte {$soporte->getNumero()}: {$soporte->titulo}</li>";
             }
         }
-        echo "</ul>";
+        $lista .= "</ul>";
+
+        return $lista;
     }
 }
